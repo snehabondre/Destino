@@ -1,0 +1,140 @@
+{% extends 'tourism/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/news_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/news_responsive.css' %}">
+
+<!-- News -->
+
+	<div class="news" style="margin-top: 90px;">
+		<div class="container">
+			<div class="row">
+                <div class="col-lg-9">
+                    <div class="news_posts">
+                    	<div class="post_title" style="font-size: 40px;">YOUR BOOKINGS</div>
+                        {% if bookings %}
+                            {% for booking in bookings %}
+                                <div class="news_post">
+                                    <div class="post_image">
+                                        <img style="height: 400px;width:850px;" src="{{ booking.package.Picture.url }}"/>
+                                        <a href="{% url 'tourism:payment' pk=booking.package.pk %}"><div class="post_image_box text-center">+</div></a>
+                                    </div>
+                                    <div class="post_title" style="font-size: 30px;">{{ booking.package.location }}</div>
+                                    <div class="post_meta">
+                                        <ul>
+                                            <li style="font-size: 20px;">Price: &#8377;{{ booking.package.Price }}/-(per Person)</li>
+                                            <li style="font-size: 20px;"><a href="{% url 'tourism:remove_booking' pk=booking.pk %}">Remove it</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="post_text">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla lectus nec diam auctor, ut fringilla diam sagittis. Quisque vel est id justo faucibus dapibus id a nibh. Aenean suscipit consequat lacus, sit amet mollis nulla. Morbi sagittis orci id lacus convallis tempus eget sit amet metus.</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <br>
+                            <div class="post_title" style="font-size: 30px;text-align: center;">NO CURRENT BOOKINGS......</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+				<!-- Sidebar -->
+				<div class="col-lg-3">
+					<div class="sidebar">
+                        <!-- Featured Posts -->
+						<div class="sidebar_featured">
+
+							<!-- Sidebar Quote -->
+							<div class="sidebar_quote">
+								<div class="quote_box"><img src="{% static 'images/quote.png' %}" alt=""></div>
+								<div class="quote_text">“Life is either a daring adventure or nothing at all.”</div>
+							</div>
+
+							<!-- Featured Post -->
+							<div class="sidebar_featured_post">
+								<div class="sidebar_featured_image"><img src="{% static 'images/sidebar_featured_1.jpg' %}" alt=""></div>
+								<div class="sidebar_featured_title"><a href="#">Top destinations in Europe</a></div>
+								<div class="sidebar_featured_meta">
+									<ul>
+										<li><a href="#">by admin</a></li>
+										<li>january 31, 2018</li>
+										<li><a href="#">3 comments</a></li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- Featured Post -->
+							<div class="sidebar_featured_post">
+								<div class="sidebar_featured_image"><img src="{% static 'images/sidebar_featured_2.jpg' %}" alt=""></div>
+								<div class="sidebar_featured_title"><a href="#">Best beaches in the world</a></div>
+								<div class="sidebar_featured_meta">
+									<ul>
+										<li><a href="#">by admin</a></li>
+										<li>january 31, 2018</li>
+										<li><a href="#">3 comments</a></li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- Featured Post -->
+							<div class="sidebar_featured_post">
+								<div class="sidebar_featured_image"><img src="{% static 'images/sidebar_featured_3.jpg' %}" alt=""></div>
+								<div class="sidebar_featured_title"><a href="#">Best beaches in the world</a></div>
+								<div class="sidebar_featured_meta">
+									<ul>
+										<li><a href="#">by admin</a></li>
+										<li>january 31, 2018</li>
+										<li><a href="#">3 comments</a></li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+
+						<!-- Offers -->
+						<div class="sidebar_offers">
+
+							<!-- Offer -->
+							<div class="sidebar_offer">
+								<div class="sidebar_offer_background" style="background-image:url({% static 'images/offer_1.jpg' %})"></div>
+								<div class="sidebar_offer_content">
+									<div class="sidebar_offer_destination">bali</div>
+									<div class="sidebar_offer_percent">38%</div>
+									<div class="sidebar_offer_title">Last Minute Offer</div>
+									<div class="sidebar_offer_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sed mauris.</div>
+									<div class="sidebar_offer_button"><a href="offers.html">See Offer</a></div>
+								</div>
+							</div>
+
+							<!-- Offer -->
+							<div class="sidebar_offer">
+								<div class="sidebar_offer_background" style="background-image:url({% static 'images/offer_2.jpg' %})"></div>
+								<div class="sidebar_offer_content">
+									<div class="sidebar_offer_destination">bali</div>
+									<div class="sidebar_offer_percent">25%</div>
+									<div class="sidebar_offer_title">Last Minute Offer</div>
+									<div class="sidebar_offer_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sed mauris.</div>
+									<div class="sidebar_offer_button"><a href="offers.html">See Offer</a></div>
+								</div>
+							</div>
+
+						</div>
+
+						<!-- Sidebar Quote -->
+						<div class="sidebar_quote">
+							<div class="quote_box"><img src="{% static 'images/quote.png' %}" alt=""></div>
+							<div class="quote_text"><span>“Traveling</span> – it leaves you speechless, then turns you into a storyteller.”</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<br>
+
+		</div>
+	</div>
+
+
+
+{% endblock %}

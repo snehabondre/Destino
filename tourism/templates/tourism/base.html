@@ -1,0 +1,255 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Destino</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Destino project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+    <link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+    <link href="{% static 'plugins/magnific-popup/magnific-popup.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+</head>
+<body>
+
+<div class="super_container">
+
+    <!-- Header -->
+
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="header_container d-flex flex-row align-items-center justify-content-start">
+
+                        <!-- Logo -->
+                        <div class="logo_container">
+                            <div class="logo">
+                                <div>destino</div>
+                                <div>travel agency</div>
+                                <div class="logo_image"><img src="{% static 'images/logo.png' %}" alt=""></div>
+                            </div>
+                        </div>
+
+                        <!-- Main Navigation -->
+                        <nav class="main_nav ml-auto">
+                            <ul class="main_nav_list">
+                                <li class="main_nav_item active"><a href="{% url 'tourism:home' %}">Home</a></li>
+
+                                {% if user.is_authenticated %}
+                                    <li class="main_nav_item"><a href="{% url 'tourism:user_profile' %}">Profile</a></li>
+                                    <li class="main_nav_item"><a href="{% url 'tourism:user_bookings' %}">Bookings</a></li>
+                                    <li class="main_nav_item"><a href="{% url 'tourism:logout' %}">Logout</a></li>
+                                {% else %}
+{#                                    <li class="main_nav_item"><a href="{% url 'tourism:signup' %}">Signup</a></li>#}
+                                    <li class="main_nav_item"><a href="{% url 'tourism:Login' %}">Signup/Login</a></li>
+                                {% endif %}
+
+
+                            </ul>
+                        </nav>
+
+                        <!-- Search -->
+                        <div class="search">
+                            <form action="#" class="search_form">
+                                <input type="search" name="search_input" class="search_input ctrl_class"
+                                       required="required" placeholder="Keyword">
+                                <button type="submit" class="search_button ml-auto ctrl_class"><img
+                                        src="{% static 'images/search.png' %}" alt=""></button>
+                            </form>
+                        </div>
+
+                        <!-- Hamburger -->
+                        <div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu -->
+
+    <div class="menu_container menu_mm">
+
+        <!-- Menu Close Button -->
+        <div class="menu_close_container">
+            <div class="menu_close"></div>
+        </div>
+
+        <!-- Menu Items -->
+        <div class="menu_inner menu_mm">
+            <div class="menu menu_mm">
+                <div class="menu_search_form_container">
+                    <form action="#" id="menu_search_form">
+                        <input type="search" class="menu_search_input menu_mm">
+                        <button id="menu_search_submit" class="menu_search_submit" type="submit"><img
+                                src="{% static 'images/search_2.png' %}" alt=""></button>
+                    </form>
+                </div>
+                <ul class="menu_list menu_mm">
+                    <li class="menu_item menu_mm"><a href="{% url 'tourism:home' %}">Home</a></li>
+
+                    {% if user.is_authenticated %}
+                        <li class="menu_item menu_mm"><a href="about.html">Profile</a></li>
+                        <li class="menu_item menu_mm"><a href="offers.html">Logout</a></li>
+                    {% else %}
+                        <li class="menu_item menu_mm"><a href="about.html">Signup</a></li>
+                        <li class="menu_item menu_mm"><a href="offers.html">Login</a></li>
+                    {% endif %}
+                    <li class="menu_item menu_mm"><a href="user_profile.html">News</a></li>
+                    <li class="menu_item menu_mm"><a href="contact.html">Contact</a></li>
+                </ul>
+
+                <!-- Menu Social -->
+
+                <div class="menu_social_container menu_mm">
+                    <ul class="menu_social menu_mm">
+                        <li class="menu_social_item menu_mm"><a href="#"><i class="fa fa-pinterest"
+                                                                            aria-hidden="true"></i></a></li>
+                        <li class="menu_social_item menu_mm"><a href="#"><i class="fa fa-linkedin"
+                                                                            aria-hidden="true"></i></a></li>
+                        <li class="menu_social_item menu_mm"><a href="#"><i class="fa fa-instagram"
+                                                                            aria-hidden="true"></i></a></li>
+                        <li class="menu_social_item menu_mm"><a href="#"><i class="fa fa-facebook"
+                                                                            aria-hidden="true"></i></a></li>
+                        <li class="menu_social_item menu_mm"><a href="#"><i class="fa fa-twitter"
+                                                                            aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="menu_copyright menu_mm">Colorlib All rights reserved</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    {% block content %}{% endblock %}
+    <!-- Newsletter -->
+
+    <div class="newsletter">
+        <!-- Image by https://unsplash.com/@garciasaldana_ -->
+        <div class="newsletter_background" style="background-image:url({% static 'images/newsletter.jpg' %})"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="newsletter_content">
+                        <div class="newsletter_title text-center">Subscribe to our Newsletter</div>
+                        <div class="newsletter_form_container">
+                            <form action="#" id="newsletter_form" class="newsletter_form">
+                                <div class="d-flex flex-md-row flex-column align-content-center justify-content-between">
+                                    <input type="email" id="newsletter_input" class="newsletter_input"
+                                           placeholder="Your E-mail Address">
+                                    <button type="submit" id="newsletter_button" class="newsletter_button">Subscribe
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+
+                <!-- Footer Column -->
+                <div class="col-lg-4 footer_col">
+                    <div class="footer_about">
+                        <!-- Logo -->
+                        <div class="logo_container">
+                            <div class="logo">
+                                <div>destino</div>
+                                <div>travel agency</div>
+                                <div class="logo_image"><img src="{% static 'images/logo.png' %}" alt=""></div>
+                            </div>
+                        </div>
+                        <div class="footer_about_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                            pulvinar sed mauris eget tincidunt. Sed lectus nulla, tempor vel eleifend quis, tempus rut
+                            rum metus. Pellentesque ultricies enim eu quam fermentum hendrerit.
+                        </div>
+                        <div class="copyright">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                            All rights reserved | This template is made with <i class="fa fa-heart-o"
+                                                                                aria-hidden="true"></i> by <a
+                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+                    </div>
+                </div>
+
+                <!-- Footer Column -->
+                <div class="col-lg-4 footer_col">
+                    <div class="footer_latest">
+                        <div class="footer_title">Latest News</div>
+                        <div class="footer_latest_content">
+
+                            <!-- Footer Latest Post -->
+                            <div class="footer_latest_item">
+                                <div class="footer_latest_image"><img src="{% static 'images/latest_1.jpg' %}"
+                                                                      alt="https://unsplash.com/@peecho"></div>
+                                <div class="footer_latest_item_content">
+                                    <div class="footer_latest_item_title"><a href="user_profile.html">Brazil Summer</a></div>
+                                    <div class="footer_latest_item_date">Jan 09, 2018</div>
+                                </div>
+                            </div>
+
+                            <!-- Footer Latest Post -->
+                            <div class="footer_latest_item">
+                                <div class="footer_latest_image"><img src="{% static 'images/latest_2.jpg' %}"
+                                                                      alt="https://unsplash.com/@sanfrancisco"></div>
+                                <div class="footer_latest_item_content">
+                                    <div class="footer_latest_item_title"><a href="user_profile.html">A perfect vacation</a>
+                                    </div>
+                                    <div class="footer_latest_item_date">Jan 09, 2018</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Column -->
+                <div class="col-lg-4 footer_col">
+                    <div class="tags footer_tags">
+                        <div class="footer_title">Tags</div>
+                        <ul class="tags_content d-flex flex-row flex-wrap align-items-start justify-content-start">
+                            <li class="tag"><a href="#">travel</a></li>
+                            <li class="tag"><a href="#">summer</a></li>
+                            <li class="tag"><a href="#">cruise</a></li>
+                            <li class="tag"><a href="#">beach</a></li>
+                            <li class="tag"><a href="#">offer</a></li>
+                            <li class="tag"><a href="#">vacation</a></li>
+                            <li class="tag"><a href="#">trip</a></li>
+                            <li class="tag"><a href="#">city break</a></li>
+                            <li class="tag"><a href="#">adventure</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

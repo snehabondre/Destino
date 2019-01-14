@@ -1,0 +1,213 @@
+{% extends 'tourism/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="peace-layout" style="margin-top: 100px">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/account_registrations.css' %}">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <!------ Include the above in your HEAD tag ---------->
+
+        <script src="{% static 'js/account_registrations.js' %}"></script>
+        {% if errors %}
+            <script>
+                $(document).ready(function () {
+                    $("#register-form-link").trigger('click');
+
+
+                });
+            </script>
+        {% endif %}
+
+        <div class="container" style="margin-bottom: 20px !important;">
+            <div class="row">
+                <div class="col-md-6 offset-3">
+                    <div class="panel panel-login">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <a href="#login-form" class="active" id="login-form-link">Login</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a href="#register-form" id="register-form-link">Register</a>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form id="login-form" action="{% url 'tourism:Login' %}" method="post"
+                                          role="form"
+                                          style="display: block;">
+                                        {% csrf_token %}
+                                        {% if error_message %}
+
+                                            <div class="alert alert-danger">
+                                                {{ error_message }}
+                                            </div>
+
+                                        {% endif %}
+                                        <div class="form-group">
+                                            <input type="text" name="username" id="username" tabindex="1"
+                                                   class="form-control"
+                                                   placeholder="Username" value="{% if login_form.username.value %}{{ login_form.username.value }}{% endif %}"
+                                                   required>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" id="password" tabindex="2"
+                                                   class="form-control" placeholder="Password" value="{% if login_form.password.value %}{{ login_form.password.value }}{% endif %}"
+                                                   required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <input type="submit" name="login-submit" id="login-submit"
+                                                           tabindex="4"
+                                                           class="form-control btn btn-login" value="Log In">
+                                                </div>
+                                            </div>
+                                        </div>
+{#                                        <div class="form-group">#}
+{#                                            <div class="row">#}
+{#                                                <div class="col-lg-12">#}
+{#                                                    <div class="text-center">#}
+{#                                                        <a href=""#}
+{#                                                           tabindex="5"#}
+{#                                                           class="forgot-password">Forgot Password?</a>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <div class="form-group">#}
+{#                                            <div class="row">#}
+{#                                                <div class="col-lg-5 col-lg-offset-1">#}
+{#                                                    <a href="{% url 'social:begin' 'facebook' %}">Login with#}
+{#                                                        Facebook</a>#}
+{#                                                </div>#}
+{#                                                <div class="col-lg-5 col-lg-offset-1">#}
+{#                                                    <a href="{% url 'social:begin' 'google-oauth2' %}">Login with#}
+{#                                                        Gmail</a>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+                                    </form>
+                                    <form id="register-form" action="{% url 'tourism:signup' %}"
+                                          method="post"
+                                          role="form" style="display: none;">{% csrf_token %}
+
+                                        <div class="form-group">
+                                            <input type="text" name="first_name" id="first-name-signup" tabindex="1"
+                                                   class="form-control"
+                                                   placeholder="First Name" value="{% if user_form.first_name.value %}{{ user_form.first_name.value }}{% endif %}"
+                                                   required>
+                                            {% if user_form.first_name.errors %}
+                                                <div class="alert alert-danger">
+                                                    {{ user_form.first_name.errors }}
+                                                </div>
+                                            {% endif %}
+
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="last_name" id="last-name-signup" tabindex="1"
+                                                   class="form-control"
+                                                   placeholder="Last Name" value="{% if user_form.last_name.value %}{{ user_form.last_name.value }}{% endif %}"
+                                                   required>
+                                            {% if user_form.last_name.errors %}
+                                                <div class="alert alert-danger">
+                                                    {{ user_form.last_name.errors }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="username" id="username-signup" tabindex="1"
+                                                   class="form-control"
+                                                   placeholder="Username" value="{% if user_form.username.value %}{{ user_form.username.value }}{% endif %}"
+                                                   required>
+                                            {% if user_form.username.errors %}
+                                                <div class="alert alert-danger">
+                                                    {{ user_form.username.errors }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" id="email" tabindex="1"
+                                                   class="form-control"
+                                                   placeholder="Email Address" value="{% if user_form.email.value %}{{ user_form.email.value }}{% endif %}"
+                                                   required>
+                                            {% if user_form.email.errors %}
+                                                <div class="alert alert-danger">
+                                                    {{ user_form.email.errors }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password1" id="id_password1" tabindex="2"
+                                                   class="form-control" placeholder="Password" value="{% if user_form.password1.value %}{{ user_form.password1.value }}{% endif %}"
+                                                   required>
+                                            {% if user_form.password1.errors %}
+                                                <div class="alert alert-danger">
+                                                    {{ user_form.password1.errors }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password2" id="id_password2" tabindex="2"
+                                                   class="form-control" placeholder="Confirm Password" value="{% if user_form.password2.value %}{{ user_form.password2.value }}{% endif %}"
+                                                   required>
+                                            {% if user_form.password2.errors %}
+                                                <div class="alert alert-danger">
+                                                    {{ user_form.password2.errors }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="Mobile_Number" id="id_Mobile_Number" tabindex="2"
+                                                   class="form-control" placeholder="Mobile Number" value="{% if Mobile_form.Mobile_Number.value %}{{ Mobile_form.Mobile_Number.value }}{% endif %}"
+                                                   required>
+                                            {% if Mobile_form.Mobile_Number.errors %}
+                                                <div class="alert alert-danger">
+                                                    {{ Mobile_form.Mobile_Number.errors }}
+                                                </div>
+                                            {% endif %}
+
+                                        </div>
+{#                                        <div class="form-group">#}
+{#                                            <select name="usertype"#}
+{#                                                    style=" height: 45px;border: 1px solid #ddd;border-radius: 3px;"#}
+{#                                                    class="form-control" required>#}
+{#                                                <option value="" disabled selected>SignUp as</option>#}
+{#                                                <option value="user">User</option>#}
+{#                                                <option value="seller">Seller</option>#}
+{#                                                <option value="pandit">Pandit</option>#}
+{#                                            </select>#}
+{#                                        </div>#}
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <input type="submit" name="register-submit" id="register-submit"
+                                                           tabindex="4" class="form-control btn btn-register"
+                                                           value="Register Now">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

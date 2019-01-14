@@ -1,0 +1,8 @@
+{% autoescape off %}
+Hi {{ user.username }},
+
+Please click on the link below to confirm your registration:
+If the link does not appear clickable then copy the link and open it on new tab.
+
+http://{{ domain }}{% url 'tourism:activate' uidb64=uid token=token %}
+{% endautoescape %}
